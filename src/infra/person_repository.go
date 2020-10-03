@@ -7,9 +7,6 @@ import (
 	"samplegofiber/src/models"
 )
 
-const dbName = "personsdb"
-const collectionName = "person"
-
 // CreatePerson método para criar nova pessoa
 func CreatePerson(person *models.Person) ([]byte, error) {
 	collection, err := GetCollection(os.Getenv("DbName"), os.Getenv("CollectionName"))
