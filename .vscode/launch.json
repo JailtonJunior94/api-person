@@ -13,8 +13,8 @@
             "env": {
                 "Environment": "Development",
                 "ConnectionString": "mongodb://localhost:27017",
-                "DbName": "personsdb",
-                "CollectionName": "person"
+                "DbName": "persondb",
+                "CollectionName": "persons"
             },
             "args": []
         }

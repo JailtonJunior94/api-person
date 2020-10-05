@@ -11,6 +11,7 @@ require (
 	github.com/go-openapi/swag v0.19.9 // indirect
 	github.com/gofiber/fiber v1.14.6
 	github.com/gofiber/fiber/v2 v2.0.5 // indirect
+	github.com/google/uuid v1.1.2
 	github.com/klauspost/compress v1.11.1 // indirect
 	github.com/mailru/easyjson v0.7.6 // indirect
 	github.com/swaggo/swag v1.6.7 // indirect

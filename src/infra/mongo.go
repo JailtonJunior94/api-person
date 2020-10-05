@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// GetConnection get connection of mongodb
+// GetConnection - Obtém conexão com mongoDB
 func GetConnection() (*mongo.Client, error) {
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(os.Getenv("ConnectionString")))
 	if err != nil {
@@ -25,7 +25,7 @@ func GetConnection() (*mongo.Client, error) {
 	return client, nil
 }
 
-// GetCollection get collection by dbName and collectionName
+// GetCollection - Obtém collection através do nome
 func GetCollection(dbName string, collectionName string) (*mongo.Collection, error) {
 	client, err := GetConnection()
 	if err != nil {
