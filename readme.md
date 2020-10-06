@@ -46,7 +46,7 @@ Implementação de GitHub Actions e deploy no **[Microsoft Azure](https://azure.
 ## Docker 🐋
 1. Para criação da imagem docker da nossa aplicação primeiro devemos criar o arquivo `Dockerfile`, após criação e configuração arquivo devemos executar o seguinte comando: 
 ```
-> docker build -t jailtonjunior/api-person:v1
+> docker build -t jailtonjunior/api-person:v1 .
 ```
 2. Para executar o container local devemos executar o seguinte comando:
 ```
@@ -58,7 +58,7 @@ Implementação de GitHub Actions e deploy no **[Microsoft Azure](https://azure.
 ```
 4. Para fazer o push da imagem que criamos devemos executar o seguinte comando: 
 ```
-> docker push jailtonjunior/api-conversao:v1
+> docker push jailtonjunior/api-person:v1
 ```
 ## Microsoft Azure ☁️
 ### Em desenvolvimento 🔨
