@@ -12,7 +12,7 @@ import (
 
 // CreatePerson - Método para criar nova pessoa
 func CreatePerson(person models.Person) (*models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DbName"), os.Getenv("CollectionName"))
+	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func CreatePerson(person models.Person) (*models.Person, error) {
 
 // ListPersons - Método para listagem de pessoas
 func ListPersons() ([]models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DbName"), os.Getenv("CollectionName"))
+	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func ListPersons() ([]models.Person, error) {
 
 // GetPersonByID - Método para listar pessoas através do ID
 func GetPersonByID(id string) (*models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DbName"), os.Getenv("CollectionName"))
+	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ func GetPersonByID(id string) (*models.Person, error) {
 
 // UpdatePerson - Método para atualizar pessoa
 func UpdatePerson(id string, person models.Person) (*models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DbName"), os.Getenv("CollectionName"))
+	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +134,7 @@ func UpdatePerson(id string, person models.Person) (*models.Person, error) {
 
 // DeletePerson - Método para deletar pessoa
 func DeletePerson(id string) (int, error) {
-	collection, err := GetCollection(os.Getenv("DbName"), os.Getenv("CollectionName"))
+	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return 0, err
 	}

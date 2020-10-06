@@ -14,6 +14,7 @@ require (
 	github.com/google/uuid v1.1.2
 	github.com/klauspost/compress v1.11.1 // indirect
 	github.com/mailru/easyjson v0.7.6 // indirect
+	github.com/subosito/gotenv v1.2.0
 	github.com/swaggo/swag v1.6.7 // indirect
 	github.com/urfave/cli/v2 v2.2.0 // indirect
 	go.mongodb.org/mongo-driver v1.4.1

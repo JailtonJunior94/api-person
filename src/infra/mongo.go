@@ -12,7 +12,7 @@ import (
 
 // GetConnection - Obtém conexão com mongoDB
 func GetConnection() (*mongo.Client, error) {
-	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(os.Getenv("ConnectionString")))
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(os.Getenv("CONNECTION_STRING")))
 	if err != nil {
 		log.Fatal(err)
 	}
