@@ -26,7 +26,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Azure WebApp Container - Deployment
-        uses: Azure/webapps-container-deploy@v1
+        uses: azure/webapps-deploy@v2
         with:
           app-name: api-person
           images: jailtonjunior/api-person:v3
