@@ -14,7 +14,7 @@ func main() {
 	app := fiber.New()
 
 	app.Get("/api", func(c *fiber.Ctx) {
-		c.Send("Seja bem-vindo(a) a API Golang + Fiber + Swagger + MongoDB + Docker")
+		c.Send("Seja bem-vindo(a) a API Golang + Fiber + Swagger + MongoDB + Docker + Microsoft Azure")
 	})
 	routes.PersonRouter(app)
 

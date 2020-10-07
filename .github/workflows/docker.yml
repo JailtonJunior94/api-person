@@ -11,11 +11,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Docker Image
-        run: docker build . --tag api-person:v2
+        run: docker build . --tag api-person:v3
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: jailtonjunior/api-person:v2
+          name: jailtonjunior/api-person:v3
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Azure WebApp Container - Deployment
+        uses: Azure/webapps-container-deploy@v1
+        with:
+          app-name: api-person
+          images: jailtonjunior/api-person:v3
