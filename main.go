@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 	"samplegofiber/src/routes"
 
@@ -20,20 +19,14 @@ func main() {
 	routes.PersonRouter(app)
 
 	println("Running on http://0.0.0.0/3000")
-	app.Listen(3000)
+	_ = app.Listen(3000)
 }
 
 func initial() {
 	environment := os.Getenv("ENVIRONMENT")
 	if environment == "Development" {
-		err := gotenv.Load()
-		if err != nil {
-			log.Println(err)
-		}
+		_ = gotenv.Load()
 	} else {
-		err := gotenv.Load(".env.production")
-		if err != nil {
-			log.Println(err)
-		}
+		_ = gotenv.Load(".env.production")
 	}
 }
