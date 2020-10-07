@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Docker Image
-        run: docker build . --tag api-person:$(date +%s)
+        run: docker build . --tag api-person:v2
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: jailtonjunior/api-person:$(date +%s)
+          name: jailtonjunior/api-person:v2
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
