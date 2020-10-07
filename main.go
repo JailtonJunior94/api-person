@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"samplegofiber/src/routes"
 
@@ -25,8 +26,14 @@ func main() {
 func initial() {
 	environment := os.Getenv("ENVIRONMENT")
 	if environment == "Development" {
-		gotenv.Load()
+		err := gotenv.Load()
+		if err != nil {
+			log.Println(err)
+		}
 	} else {
-		gotenv.Load(".env.production")
+		err := gotenv.Load(".env.production")
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
