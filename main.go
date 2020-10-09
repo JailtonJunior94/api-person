@@ -2,7 +2,8 @@ package main
 
 import (
 	"os"
-	"samplegofiber/src/routes"
+
+	"github.com/JailtonJunior94/api-person/src/routes"
 
 	"github.com/gofiber/fiber"
 	"github.com/subosito/gotenv"

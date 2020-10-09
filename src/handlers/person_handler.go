@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"encoding/json"
-	"samplegofiber/src/infra"
-	"samplegofiber/src/models"
+	"github.com/JailtonJunior94/api-person/src/infra"
+	"github.com/JailtonJunior94/api-person/src/models"
 
 	"github.com/gofiber/fiber"
 )

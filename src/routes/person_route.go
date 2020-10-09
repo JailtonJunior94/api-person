@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"samplegofiber/src/handlers"
+	"github.com/JailtonJunior94/api-person/src/handlers"
 
 	"github.com/gofiber/fiber"
 )

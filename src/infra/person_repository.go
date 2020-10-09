@@ -2,8 +2,8 @@ package infra
 
 import (
 	"context"
+	"github.com/JailtonJunior94/api-person/src/models"
 	"os"
-	"samplegofiber/src/models"
 	"time"
 
 	uuid "github.com/google/uuid"
