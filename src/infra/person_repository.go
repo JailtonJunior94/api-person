@@ -20,7 +20,6 @@ func NewUserRepository(database config.MongoClient) Repository {
 	return Repository{database: database}
 }
 
-// CreatePerson - Método para criar nova pessoa
 func (r Repository) CreatePerson(person models.Person) (*models.Person, error) {
 	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
@@ -45,7 +44,6 @@ func (r Repository) CreatePerson(person models.Person) (*models.Person, error) {
 	return &insert, nil
 }
 
-// ListPersons - Método para listagem de pessoas
 func (r Repository) ListPersons() ([]models.Person, error) {
 	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
@@ -80,7 +78,6 @@ func (r Repository) ListPersons() ([]models.Person, error) {
 	return persons, nil
 }
 
-// GetPersonByID - Método para listar pessoas através do ID
 func (r Repository) GetPersonByID(id string) (*models.Person, error) {
 	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
@@ -112,7 +109,6 @@ func (r Repository) GetPersonByID(id string) (*models.Person, error) {
 	return &person, nil
 }
 
-// UpdatePerson - Método para atualizar pessoa
 func (r Repository) UpdatePerson(id string, person models.Person) (*models.Person, error) {
 	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
@@ -143,7 +139,6 @@ func (r Repository) UpdatePerson(id string, person models.Person) (*models.Perso
 	return &update, nil
 }
 
-// DeletePerson - Método para deletar pessoa
 func (r Repository) DeletePerson(id string) (int, error) {
 	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {

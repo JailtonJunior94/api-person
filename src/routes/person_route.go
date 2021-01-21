@@ -10,7 +10,6 @@ import (
 	"github.com/gofiber/fiber"
 )
 
-// PersonRouter - Rota para CRUD de pessoas
 func PersonRouter(app *fiber.App) {
 	c, err := config.NewConnection()
 	if err != nil {

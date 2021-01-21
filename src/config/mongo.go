@@ -16,7 +16,6 @@ type MongoClient struct {
 	Client *mongo.Client
 }
 
-// NewConnection -
 func NewConnection() (MongoClient, error) {
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(os.Getenv("CONNECTION_STRING")))
 	if err != nil {
@@ -32,7 +31,6 @@ func NewConnection() (MongoClient, error) {
 	return MongoClient{Client: client}, nil
 }
 
-// GetCollection - Obtém collection através do nome
 func (m MongoClient) GetCollection(dbName string, collectionName string) (*mongo.Collection, error) {
 	collection := m.Client.Database(dbName).Collection(collectionName)
 	return collection, nil

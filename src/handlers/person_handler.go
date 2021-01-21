@@ -13,12 +13,10 @@ type Handle struct {
 	Repository infra.Repository
 }
 
-// NewUserHandle -
 func NewUserHandle(repository infra.Repository) Handle {
 	return Handle{Repository: repository}
 }
 
-// ListPersonHandle - handle para listar pessoas
 func (h Handle) ListPersonHandle(c *fiber.Ctx) {
 	res, err := h.Repository.ListPersons()
 	if err != nil {
@@ -34,7 +32,6 @@ func (h Handle) ListPersonHandle(c *fiber.Ctx) {
 	_ = c.Status(200).JSON(res)
 }
 
-// GetByIDPersonHandle - handle para recuperar pessoa por Id
 func (h Handle) GetByIDPersonHandle(c *fiber.Ctx) {
 	id := c.Params("id")
 	res, err := h.Repository.GetPersonByID(id)
@@ -51,7 +48,6 @@ func (h Handle) GetByIDPersonHandle(c *fiber.Ctx) {
 	_ = c.Status(200).JSON(res)
 }
 
-// NewPersonHandle - handle para adicionar nova pessoa
 func (h Handle) NewPersonHandle(c *fiber.Ctx) {
 	body := models.Person{}
 	_ = json.Unmarshal([]byte(c.Body()), &body)
@@ -65,7 +61,6 @@ func (h Handle) NewPersonHandle(c *fiber.Ctx) {
 	_ = c.Status(201).JSON(newPerson)
 }
 
-// UpdatePersonHandle - handle para atualizar dados da pessoa
 func (h Handle) UpdatePersonHandle(c *fiber.Ctx) {
 	id := c.Params("id")
 	body := models.Person{}
@@ -86,7 +81,6 @@ func (h Handle) UpdatePersonHandle(c *fiber.Ctx) {
 	_ = c.Status(200).JSON(update)
 }
 
-// DeletePersonHandle - handle para remover cadastro da pessoa
 func (s Handle) DeletePersonHandle(c *fiber.Ctx) {
 	id := c.Params("id")
 	line, err := s.Repository.DeletePerson(id)
