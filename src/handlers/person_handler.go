@@ -2,15 +2,25 @@ package handlers
 
 import (
 	"encoding/json"
+
 	"github.com/JailtonJunior94/api-person/src/infra"
 	"github.com/JailtonJunior94/api-person/src/models"
 
 	"github.com/gofiber/fiber"
 )
 
+type Handle struct {
+	Repository infra.Repository
+}
+
+// NewUserHandle -
+func NewUserHandle(repository infra.Repository) Handle {
+	return Handle{Repository: repository}
+}
+
 // ListPersonHandle - handle para listar pessoas
-func ListPersonHandle(c *fiber.Ctx) {
-	res, err := infra.ListPersons()
+func (h Handle) ListPersonHandle(c *fiber.Ctx) {
+	res, err := h.Repository.ListPersons()
 	if err != nil {
 		_ = c.Status(400).JSON(models.Response{Success: false, Message: "Não foi possível listar pessoas!"})
 		return
@@ -25,9 +35,9 @@ func ListPersonHandle(c *fiber.Ctx) {
 }
 
 // GetByIDPersonHandle - handle para recuperar pessoa por Id
-func GetByIDPersonHandle(c *fiber.Ctx) {
+func (h Handle) GetByIDPersonHandle(c *fiber.Ctx) {
 	id := c.Params("id")
-	res, err := infra.GetPersonByID(id)
+	res, err := h.Repository.GetPersonByID(id)
 	if err != nil {
 		_ = c.Status(400).JSON(models.Response{Success: false, Message: "Não foi possível encontrar a pessoa informada"})
 		return
@@ -42,11 +52,11 @@ func GetByIDPersonHandle(c *fiber.Ctx) {
 }
 
 // NewPersonHandle - handle para adicionar nova pessoa
-func NewPersonHandle(c *fiber.Ctx) {
+func (h Handle) NewPersonHandle(c *fiber.Ctx) {
 	body := models.Person{}
 	_ = json.Unmarshal([]byte(c.Body()), &body)
 
-	newPerson, err := infra.CreatePerson(body)
+	newPerson, err := h.Repository.CreatePerson(body)
 	if err != nil {
 		_ = c.Status(400).JSON(models.Response{Success: false, Message: "Não foi possível cadastrar pessoa"})
 		return
@@ -56,13 +66,13 @@ func NewPersonHandle(c *fiber.Ctx) {
 }
 
 // UpdatePersonHandle - handle para atualizar dados da pessoa
-func UpdatePersonHandle(c *fiber.Ctx) {
+func (h Handle) UpdatePersonHandle(c *fiber.Ctx) {
 	id := c.Params("id")
 	body := models.Person{}
 
 	_ = json.Unmarshal([]byte(c.Body()), &body)
 
-	update, err := infra.UpdatePerson(id, body)
+	update, err := h.Repository.UpdatePerson(id, body)
 	if err != nil {
 		_ = c.Status(400).JSON(models.Response{Success: false, Message: "Não foi possível atualizar pessoa"})
 		return
@@ -77,9 +87,9 @@ func UpdatePersonHandle(c *fiber.Ctx) {
 }
 
 // DeletePersonHandle - handle para remover cadastro da pessoa
-func DeletePersonHandle(c *fiber.Ctx) {
+func (s Handle) DeletePersonHandle(c *fiber.Ctx) {
 	id := c.Params("id")
-	line, err := infra.DeletePerson(id)
+	line, err := s.Repository.DeletePerson(id)
 	if err != nil {
 		_ = c.Status(400).JSON(models.Response{Success: false, Message: "Erro ao deletar pessoa"})
 		return

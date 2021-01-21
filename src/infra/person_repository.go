@@ -2,17 +2,27 @@ package infra
 
 import (
 	"context"
-	"github.com/JailtonJunior94/api-person/src/models"
 	"os"
 	"time"
+
+	"github.com/JailtonJunior94/api-person/src/config"
+	"github.com/JailtonJunior94/api-person/src/models"
 
 	uuid "github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
+type Repository struct {
+	database config.MongoClient
+}
+
+func NewUserRepository(database config.MongoClient) Repository {
+	return Repository{database: database}
+}
+
 // CreatePerson - Método para criar nova pessoa
-func CreatePerson(person models.Person) (*models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
+func (r Repository) CreatePerson(person models.Person) (*models.Person, error) {
+	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -36,8 +46,8 @@ func CreatePerson(person models.Person) (*models.Person, error) {
 }
 
 // ListPersons - Método para listagem de pessoas
-func ListPersons() ([]models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
+func (r Repository) ListPersons() ([]models.Person, error) {
+	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -60,6 +70,7 @@ func ListPersons() ([]models.Person, error) {
 
 		persons = append(persons, p)
 	}
+
 	findResult.Close(context.Background())
 
 	if len(persons) == 0 {
@@ -70,8 +81,8 @@ func ListPersons() ([]models.Person, error) {
 }
 
 // GetPersonByID - Método para listar pessoas através do ID
-func GetPersonByID(id string) (*models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
+func (r Repository) GetPersonByID(id string) (*models.Person, error) {
+	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -102,8 +113,8 @@ func GetPersonByID(id string) (*models.Person, error) {
 }
 
 // UpdatePerson - Método para atualizar pessoa
-func UpdatePerson(id string, person models.Person) (*models.Person, error) {
-	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
+func (r Repository) UpdatePerson(id string, person models.Person) (*models.Person, error) {
+	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return nil, err
 	}
@@ -133,8 +144,8 @@ func UpdatePerson(id string, person models.Person) (*models.Person, error) {
 }
 
 // DeletePerson - Método para deletar pessoa
-func DeletePerson(id string) (int, error) {
-	collection, err := GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
+func (r Repository) DeletePerson(id string) (int, error) {
+	collection, err := r.database.GetCollection(os.Getenv("DB_NAME"), os.Getenv("COLLECTION_NAME"))
 	if err != nil {
 		return 0, err
 	}

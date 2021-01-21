@@ -1,7 +1,9 @@
-package infra
+package config
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"log"
 	"os"
 
@@ -10,8 +12,12 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// GetConnection - Obtém conexão com mongoDB
-func GetConnection() (*mongo.Client, error) {
+type MongoClient struct {
+	Client *mongo.Client
+}
+
+// NewConnection -
+func NewConnection() (MongoClient, error) {
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(os.Getenv("CONNECTION_STRING")))
 	if err != nil {
 		log.Fatal(err)
@@ -19,19 +25,15 @@ func GetConnection() (*mongo.Client, error) {
 
 	err = client.Ping(context.Background(), readpref.Primary())
 	if err != nil {
-		log.Fatal(err)
+		fmt.Printf("Erro ao conectar: %v", err)
+		return MongoClient{}, errors.New("Erro ao conectar")
 	}
 
-	return client, nil
+	return MongoClient{Client: client}, nil
 }
 
 // GetCollection - Obtém collection através do nome
-func GetCollection(dbName string, collectionName string) (*mongo.Collection, error) {
-	client, err := GetConnection()
-	if err != nil {
-		return nil, err
-	}
-
-	collection := client.Database(dbName).Collection(collectionName)
+func (m MongoClient) GetCollection(dbName string, collectionName string) (*mongo.Collection, error) {
+	collection := m.Client.Database(dbName).Collection(collectionName)
 	return collection, nil
 }
