@@ -16,7 +16,6 @@ ENV PORT=3000
 
 COPY --from=builder /app/main .
 COPY .env .
-COPY .env.production .
 
 EXPOSE 3000
 
