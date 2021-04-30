@@ -1,7 +1,7 @@
 package main
 
 import (
-	"os"
+	"log"
 
 	"github.com/JailtonJunior94/api-person/src/routes"
 
@@ -10,7 +10,9 @@ import (
 )
 
 func main() {
-	initial()
+	if err := gotenv.Load(); err != nil {
+		log.Fatal(err)
+	}
 
 	app := fiber.New()
 
@@ -21,13 +23,4 @@ func main() {
 
 	println("Running on http://0.0.0.0/3000")
 	_ = app.Listen(3000)
-}
-
-func initial() {
-	environment := os.Getenv("ENVIRONMENT")
-	if environment == "Development" {
-		_ = gotenv.Load()
-	} else {
-		_ = gotenv.Load(".env.production")
-	}
 }
