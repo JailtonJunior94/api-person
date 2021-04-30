@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: personapi-service
+    namespace: estudos
+spec:
+    selector:
+        app: personapi
+    ports:
+        - port: 4000
+          targetPort: 4000
+    type: LoadBalancer

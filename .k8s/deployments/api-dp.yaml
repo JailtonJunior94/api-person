@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: personapi
+    name: personapi-deployment
+    namespace: estudos
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: personapi
+    template:
+        metadata:
+            labels:
+                app: personapi
+        spec:
+            containers:
+                - name: personapi
+                  image: jailtonjunior/personapi:v1
+                  resources:
+                      limits:
+                          cpu: "100m"
+                          memory: "128Mi"
+                  env:
+                      - name: ENVIRONMENT
+                        value: Production
+                  ports:
+                      - containerPort: 4000
