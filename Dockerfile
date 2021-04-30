@@ -15,7 +15,7 @@ ENV TZ=America/Sao_Paulo
 ENV PORT=3000
 
 COPY --from=builder /app/main .
-COPY env .
+COPY .env .
 
 EXPOSE 3000
 
