@@ -37,15 +37,10 @@ jobs:
                   method: kubeconfig
                   kubeconfig: ${{secrets.K8S_CONFIG}}
 
-            - name: Create Namespace
-              uses: Azure/k8s-deploy@v1.3
-              with:
-                  manifests: |
-                      .k8s/namespaces/estudos.yaml
-
             - name: Deploy MongoDB
               uses: Azure/k8s-deploy@v1.3
               with:
+                  namespace: estudos
                   manifests: |
                       .k8s/deployments/mongo-dp.yaml
                       .k8s/services/mongo-svc.yaml
@@ -53,6 +48,7 @@ jobs:
             - name: Deploy API
               uses: Azure/k8s-deploy@v1.3
               with:
+                  namespace: estudos
                   images: jailtonjunior/personapi:${{github.run_number}}
                   manifests: |
                       .k8s/deployments/api-dp.yaml
