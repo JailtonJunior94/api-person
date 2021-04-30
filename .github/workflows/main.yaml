@@ -19,7 +19,7 @@ jobs:
               uses: docker/build-push-action@v2.4.0
               with:
                   context: ./src
-                  file: ./Dockerfile
+                  file: Dockerfile
                   push: true
                   tags: |
                       jailtonjunior/personapi:latest
