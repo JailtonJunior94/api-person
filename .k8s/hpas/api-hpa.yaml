@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+    name: personapi-hpa
+    namespace: estudos
+spec:
+    scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: personapi-deployment
+    minReplicas: 1
+    maxReplicas: 30
+    targetCPUUtilizationPercentage: 25

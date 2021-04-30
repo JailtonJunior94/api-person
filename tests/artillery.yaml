@@ -1,0 +1,16 @@
+config:
+    target: "http://127.0.0.1:63346"
+    phases:
+        - duration: 360
+          arrivalRate: 20
+scenarios:
+    - flow:
+          - get:
+                url: "/api/v1/persons"
+          - post:
+                url: "/api/v1/persons"
+                json:
+                    firstname: Jailton
+                    lastname: Junior
+                    email: jailtonjunior@email.com
+                    age: 27
